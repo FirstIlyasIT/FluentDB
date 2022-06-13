@@ -2,9 +2,14 @@ namespace NHibFluent.Model
 {
     public class NHibFluentModel
     {
-        public TableConfig AlterTable()
+        public AlterTableConfig AlterTable()
         {
-            return new TableConfig();
+            return new AlterTableConfig();
+        }
+
+        public NewTableConfig CreateTable()
+        {
+            return new NewTableConfig();
         }
     }
 }

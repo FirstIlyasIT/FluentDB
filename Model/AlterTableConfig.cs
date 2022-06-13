@@ -1,28 +1,28 @@
 namespace NHibFluent.Model
 {
-    public class TableConfig
+    public class AlterTableConfig
     {
-        public TableConfig AddColumn()
+        public AlterTableConfig AddColumn()
         {
             return this;
         }
 
-        public TableConfig DropColumn()
+        public AlterTableConfig DropColumn()
         {
             return this;
         }
 
-        public TableConfig ChangeColumn()
+        public AlterTableConfig ChangeColumn()
         {
             return this;
         }
 
-        public TableConfig Default()
+        public AlterTableConfig Default()
         {
             return this;
         }
 
-        public TableConfig AfterColumn()
+        public AlterTableConfig AfterColumn()
         {
             return this;
         }
