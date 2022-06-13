@@ -7,12 +7,22 @@ namespace NHibFluent.Model
             return this;
         }
 
+        public TableConfig DropColumn()
+        {
+            return this;
+        }
+
+        public TableConfig ChangeColumn()
+        {
+            return this;
+        }
+
         public TableConfig Default()
         {
             return this;
         }
 
-        public TableConfig After()
+        public TableConfig AfterColumn()
         {
             return this;
         }
