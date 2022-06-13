@@ -2,7 +2,7 @@ namespace NHibFluent.Model
 {
     public class NewTableConfig
     {
-        public NewTableConfig NewColumn()
+        public NewTableConfig AddColumn()
         {
             return this;
         }
