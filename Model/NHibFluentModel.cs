@@ -11,5 +11,10 @@ namespace NHibFluent.Model
         {
             return new NewTableConfig();
         }
+
+        public DropTableConfig DropTable()
+        {
+            return new DropTableConfig();
+        }
     }
 }

@@ -12,6 +12,11 @@ namespace NHibFluent.Model
             return this;
         }
 
+        public NewTableConfig CanNull()
+        {
+            return this;
+        }
+
         public NewTableConfig NotNull()
         {
             return this;
