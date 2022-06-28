@@ -1,6 +1,6 @@
 namespace NHibFluent.Model
 {
-    public class DropTableConfig
+    public class DropTableConfig : BaseTableConfig
     {
         public DropTableConfig IfExist()
         {

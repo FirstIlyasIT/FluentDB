@@ -1,12 +1,7 @@
 namespace NHibFluent.Model
 {
-    public class NewTableConfig
+    public class NewTableConfig : BaseTableConfig
     {
-        public NewTableConfig AddColumn()
-        {
-            return this;
-        }
-
         public NewTableConfig Default()
         {
             return this;

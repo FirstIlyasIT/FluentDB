@@ -1,7 +1,19 @@
+using System;
+
 namespace NHibFluent.Model
 {
-    public class AlterTableConfig: NewTableConfig
+    public class AlterTableConfig: BaseTableConfig
     {
+        public AlterTableConfig(string tableName)
+        {
+            Config = $"ALTER TABLE {tableName}";
+        }
+        public AddColumnConfig AddColumn(string columnName, Type columnType, bool canNull)
+        {
+            Config += $"ADD COLUMN {columnName} {TypeResolve(columnType)} {CanNull(canNull)}";
+            return new AddColumnConfig(this);
+        }
+        
         public AlterTableConfig DropColumn()
         {
             return this;
@@ -12,9 +24,21 @@ namespace NHibFluent.Model
             return this;
         }
 
-        public AlterTableConfig AfterColumn()
+        private string TypeResolve(Type type)
         {
-            return this;
+            if (type == typeof(string))
+            {
+                return "TEXT";
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+
+        private string CanNull(bool canNull)
+        {
+            return canNull ? "NULL" : String.Empty;
         }
     }
 }

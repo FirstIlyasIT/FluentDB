@@ -6,7 +6,9 @@ namespace NHibFluent
     {
         public MigrationPrimer()
         {
-            AlterTable().AddColumn();
+            AlterTable("my_table")
+                .AddColumn(columnName: "name", columnType: typeof(string), canNull: true)
+                .DefaultValue(value: null);
         }
     }
 }
