@@ -1,8 +1,15 @@
+using System;
+
 namespace NHibFluent.Model
 {
     public class NHibFluentModel
     {
-        public AlterTableConfig AlterTable(string tableName)
+        protected NHibFluentModel(string connection, Version currentVersion)
+        {
+            
+        }
+
+        protected AlterTableConfig AlterTable(string tableName)
         {
             return new AlterTableConfig(tableName);
         }

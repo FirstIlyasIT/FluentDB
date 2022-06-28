@@ -1,10 +1,13 @@
+using System;
 using NHibFluent.Model;
 
 namespace NHibFluent.DomainModelPrimer
 {
     public class MigrationPrimer: NHibFluentModel
     {
-        public MigrationPrimer()
+        public MigrationPrimer(
+            string connection, 
+            Version currentVersion) : base(connection, currentVersion)
         {
             AlterTable("my_table")
                 .AddColumn(columnName: "name", columnType: typeof(string), canNull: true)
@@ -21,8 +24,6 @@ namespace NHibFluent.DomainModelPrimer
                     columnType: typeof(Post),
                     canNull: false)
                 .DefaultValue(Post.Cleaner);
-
-
         }
     }
 }
