@@ -11,8 +11,10 @@ public class MigrationPrimer: NHibFluentModel
         Version targetVersion) : base(connection, currentVersion, targetVersion)
     {
         CreateTable(tableName: "employee")
-            .AddColumn(columnName: "id", canNull: false);
-                
+            .PrimaryKey(columnName: "id", autoIncrement: true, startAutoIncrement: 1)
+            .AddColumn(columnName: "name", canNull: false, columnType: new char[15])
+            .AddColumn(columnName: "post", canNull: true, columnType: typeof(Post));
+
         EndMigration(new Version(1, 0));
     }
 }
