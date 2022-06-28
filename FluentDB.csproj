@@ -4,6 +4,7 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <LangVersion>10</LangVersion>
         <Nullable>disable</Nullable>
+        <RootNamespace>NHibFluent</RootNamespace>
     </PropertyGroup>
 
 </Project>

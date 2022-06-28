@@ -1,6 +1,11 @@
-namespace NHibFluent.Model;
+using System;
+
+namespace FluentDB.Model;
 
 public class BaseTableConfig
 {
-    public string Config { get; set; }
+    private string TypeResolve(Type type)
+    {
+        throw new InvalidOperationException();
+    }
 }

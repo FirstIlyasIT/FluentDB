@@ -1,6 +1,6 @@
 using System;
 
-namespace NHibFluent.Model;
+namespace FluentDB.Model;
 
 public class NHibFluentModel
 {
@@ -17,14 +17,14 @@ public class NHibFluentModel
         return new AlterTableConfig(tableName);
     }
 
-    public NewTableConfig CreateTable(string tableName)
+    public CreateTableConfig CreateTable(string tableName)
     {
-        return new NewTableConfig(tableName);
+        return new CreateTableConfig(tableName);
     }
 
-    public DropTableConfig DropTable()
+    public DropTableConfig DropTable(string tableName)
     {
-        return new DropTableConfig();
+        return new DropTableConfig(tableName);
     }
 
     protected void EndMigration(Version  newVersion)

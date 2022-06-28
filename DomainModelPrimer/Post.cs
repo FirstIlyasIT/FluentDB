@@ -1,4 +1,4 @@
-namespace NHibFluent.DomainModelPrimer;
+namespace FluentDB.DomainModelPrimer;
 
 public enum Post
 {
