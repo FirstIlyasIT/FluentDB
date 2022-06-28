@@ -23,5 +23,10 @@ namespace NHibFluent.Model
         {
             return new DropTableConfig();
         }
+
+        protected void EndMigration(Version  newVersion)
+        {
+            
+        }
     }
 }

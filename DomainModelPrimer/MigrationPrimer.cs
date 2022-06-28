@@ -24,6 +24,8 @@ namespace NHibFluent.DomainModelPrimer
                     columnType: typeof(Post),
                     canNull: false)
                 .DefaultValue(Post.Cleaner);
+            
+            EndMigration(new Version(1, 0));
         }
     }
 }
