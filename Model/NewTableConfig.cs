@@ -1,25 +1,14 @@
-namespace NHibFluent.Model
+namespace NHibFluent.Model;
+
+public class NewTableConfig : BaseTableConfig
 {
-    public class NewTableConfig : BaseTableConfig
+    public NewTableConfig(string tableName)
     {
-        public NewTableConfig Default()
-        {
-            return this;
-        }
+        Config = "CREATE TABLE IF NOT EXISTS {tableName}";
+    }
 
-        public NewTableConfig CanNull()
-        {
-            return this;
-        }
-
-        public NewTableConfig NotNull()
-        {
-            return this;
-        }
-
-        public NewTableConfig PrimaryKey()
-        {
-            return this;
-        }
+    public NewTableColumnConfig AddColumn(string columnName, bool canNull)
+    {
+        return new NewTableColumnConfig(this);
     }
 }

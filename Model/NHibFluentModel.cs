@@ -1,32 +1,34 @@
 using System;
 
-namespace NHibFluent.Model
+namespace NHibFluent.Model;
+
+public class NHibFluentModel
 {
-    public class NHibFluentModel
+    protected NHibFluentModel(
+        string connection, 
+        Version currentVersion, 
+        Version targetVersion)
     {
-        protected NHibFluentModel(string connection, Version currentVersion)
-        {
             
-        }
+    }
 
-        protected AlterTableConfig AlterTable(string tableName)
-        {
-            return new AlterTableConfig(tableName);
-        }
+    protected AlterTableConfig AlterTable(string tableName)
+    {
+        return new AlterTableConfig(tableName);
+    }
 
-        public NewTableConfig CreateTable()
-        {
-            return new NewTableConfig();
-        }
+    public NewTableConfig CreateTable(string tableName)
+    {
+        return new NewTableConfig(tableName);
+    }
 
-        public DropTableConfig DropTable()
-        {
-            return new DropTableConfig();
-        }
+    public DropTableConfig DropTable()
+    {
+        return new DropTableConfig();
+    }
 
-        protected void EndMigration(Version  newVersion)
-        {
+    protected void EndMigration(Version  newVersion)
+    {
             
-        }
     }
 }

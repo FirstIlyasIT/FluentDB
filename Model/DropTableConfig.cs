@@ -1,10 +1,9 @@
-namespace NHibFluent.Model
+namespace NHibFluent.Model;
+
+public class DropTableConfig : BaseTableConfig
 {
-    public class DropTableConfig : BaseTableConfig
+    public DropTableConfig IfExist()
     {
-        public DropTableConfig IfExist()
-        {
-            return this;
-        }
+        return this;
     }
 }

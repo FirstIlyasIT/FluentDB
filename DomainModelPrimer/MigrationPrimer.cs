@@ -1,31 +1,18 @@
 using System;
 using NHibFluent.Model;
 
-namespace NHibFluent.DomainModelPrimer
+namespace NHibFluent.DomainModelPrimer;
+
+public class MigrationPrimer: NHibFluentModel
 {
-    public class MigrationPrimer: NHibFluentModel
+    public MigrationPrimer(
+        string connection, 
+        Version currentVersion,
+        Version targetVersion) : base(connection, currentVersion, targetVersion)
     {
-        public MigrationPrimer(
-            string connection, 
-            Version currentVersion) : base(connection, currentVersion)
-        {
-            AlterTable("my_table")
-                .AddColumn(columnName: "name", columnType: typeof(string), canNull: true)
-                .DefaultValue(value: null);
-            
-            AlterTable("my_table")
-                .AddColumn(columnName: "name", columnType: new char[15], canNull: true)
-                .DefaultValue(value: null);
-            
-            AlterTable("Employee")
-                .ChangeColumn(
-                    oldColumnName: "past",
-                    newColumnName: "post",
-                    columnType: typeof(Post),
-                    canNull: false)
-                .DefaultValue(Post.Cleaner);
-            
-            EndMigration(new Version(1, 0));
-        }
+        CreateTable(tableName: "employee")
+            .AddColumn(columnName: "id", canNull: false);
+                
+        EndMigration(new Version(1, 0));
     }
 }

@@ -1,7 +1,6 @@
-namespace NHibFluent.Model
+namespace NHibFluent.Model;
+
+public class BaseTableConfig
 {
-    public class BaseTableConfig
-    {
-        public string Config { get; set; }
-    }
+    public string Config { get; set; }
 }
