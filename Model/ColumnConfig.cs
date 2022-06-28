@@ -1,4 +1,4 @@
-namespace NHibFluent.Model;
+namespace FluentDB.Model;
 
 public class ColumnConfig
 {
@@ -10,13 +10,11 @@ public class ColumnConfig
 
     public ColumnConfig DefaultValue(object value)
     {
-        _alterTableConfig.Config += $"DEFAULT {value}";
         return this;
     }
 
     public ColumnConfig AfterColumn(string namePreviousColumn)
     {
-        _alterTableConfig.Config += $"AFTER {namePreviousColumn}";
         return this;
     }
 }
