@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace NHibFluent.Model
 {
@@ -8,10 +9,45 @@ namespace NHibFluent.Model
         {
             Config = $"ALTER TABLE {tableName}";
         }
-        public AddColumnConfig AddColumn(string columnName, Type columnType, bool canNull)
+        
+        public ColumnConfig AddColumn<TArray>(
+            string columnName, 
+            TArray[] columnType, 
+            bool canNull)
         {
-            Config += $"ADD COLUMN {columnName} {TypeResolve(columnType)} {CanNull(canNull)}";
-            return new AddColumnConfig(this);
+            Config += $"ADD COLUMN {columnName} " +
+                      $"{TypeResolve(typeof(TArray))}({columnType.Length})" +
+                      $"{CanNull(canNull)}";
+            return new ColumnConfig(this);
+        }
+        public ColumnConfig AddColumn(string columnName, Type columnType, bool canNull)
+        {
+            Config += $"ADD COLUMN {columnName} " +
+                      $"{TypeResolve(columnType)} {CanNull(canNull)}";
+            return new ColumnConfig(this);
+        }
+        
+        public AlterTableConfig ChangeColumn<TArray>(
+            string oldColumnName, 
+            string newColumnName, 
+            TArray[] columnType, 
+            bool canNull)
+        {
+            Config += $"CHANGE COLUMN {oldColumnName} {newColumnName} " +
+                      $"{TypeResolve(typeof(TArray))}({columnType.Length})" +
+                      $"{CanNull(canNull)}";
+            return this;
+        }
+        
+        public ColumnConfig ChangeColumn(
+            string oldColumnName, 
+            string newColumnName, 
+            Type columnType, 
+            bool canNull)
+        {
+            Config += $"CHANGE COLUMN {oldColumnName} {newColumnName} " +
+                      $"{TypeResolve(columnType)} {CanNull(canNull)}";
+            return new ColumnConfig(this);
         }
         
         public AlterTableConfig DropColumn()
@@ -19,26 +55,19 @@ namespace NHibFluent.Model
             return this;
         }
 
-        public AlterTableConfig ChangeColumn()
-        {
-            return this;
-        }
-
-        private string TypeResolve(Type type)
-        {
+        private string TypeResolve(Type type) {
             if (type == typeof(string))
-            {
                 return "TEXT";
-            }
-            else
-            {
-                throw new Exception();
-            }
+            if(type == typeof(char))
+                return "VARCHAR";
+            if (type == typeof(bool))
+                return "TINYINT(1)";
+            if (type == typeof(Enum))
+                return $"ENUM({String.Join(',', Enum.GetNames(type))})";
+            throw new ArgumentOutOfRangeException($"{type} not support");
         }
 
-        private string CanNull(bool canNull)
-        {
-            return canNull ? "NULL" : String.Empty;
-        }
+        private string CanNull(bool canNull) 
+            => canNull ? "NULL" : "NOT NULL";
     }
 }
