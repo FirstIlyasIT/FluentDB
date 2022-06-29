@@ -1,12 +1,17 @@
 using System;
+using FluentDB.Model;
 
-namespace FluentDB.Model;
+namespace FluentDB.Fluent;
 
 public class CreateTableConfig : BaseTableConfig
 {
-    public CreateTableConfig(string tableName, TypeDb typeDb) : base(typeDb)
+    private readonly Table _table;
+    public CreateTableConfig(
+        string tableName, 
+        TypeDb typeDb, 
+        DataBaseSchema dataBaseSchema) : base(typeDb, dataBaseSchema)
     {
-        
+        _table = new Table(tableName);
     }
 
     public CreateTableConfig AddColumn(

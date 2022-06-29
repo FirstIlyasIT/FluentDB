@@ -1,10 +1,14 @@
 using System;
+using FluentDB.Model;
 
-namespace FluentDB.Model;
+namespace FluentDB.Fluent;
 
 public class AlterTableConfig: BaseTableConfig
 {
-    public AlterTableConfig(string tableName, TypeDb typeDb) : base(typeDb)
+    public AlterTableConfig(
+        string tableName, 
+        TypeDb typeDb, 
+        DataBaseSchema dataBaseSchema) : base(typeDb, dataBaseSchema)
     {
         
     }

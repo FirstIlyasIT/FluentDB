@@ -1,15 +1,19 @@
 using System;
+using FluentDB.Model;
 
-namespace FluentDB.Model;
+namespace FluentDB.Fluent;
 
 public class BaseTableConfig
 {
-    public BaseTableConfig(TypeDb typeDb)
+    protected BaseTableConfig(TypeDb typeDb, DataBaseSchema dataBaseSchema)
     {
         _typeDb = typeDb;
+        _dataBaseSchema = dataBaseSchema;
     }
     
-    private TypeDb _typeDb;
+    private readonly TypeDb _typeDb;
+
+    private readonly DataBaseSchema _dataBaseSchema;
     
     private string TypeResolve(Type type)
     {
