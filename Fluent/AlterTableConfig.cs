@@ -1,14 +1,12 @@
 using System;
+using FluentDB.Enums;
 using FluentDB.Model;
 
 namespace FluentDB.Fluent;
 
 public class AlterTableConfig: BaseTableConfig
 {
-    public AlterTableConfig(
-        string tableName, 
-        TypeDb typeDb, 
-        DataBaseSchema dataBaseSchema) : base(typeDb, dataBaseSchema)
+    public AlterTableConfig(TypeDb typeDb, Table table) : base(typeDb, table)
     {
         
     }
@@ -29,6 +27,12 @@ public class AlterTableConfig: BaseTableConfig
         object defaultValue, 
         string namePreviousColumn)
     {
+        var column = new Column(
+            columnName, 
+            TypeResolve(columnType), 
+            canNull, 
+            DefaultValueResolve(defaultValue));
+        Table.AddColumn(ref column);
         return this;
     }
         

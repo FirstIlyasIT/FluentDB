@@ -13,8 +13,8 @@ public class Table
         _columns = new Dictionary<string, Column>();
     }
 
-    public void AddColumn(string columnName, Column column)
+    public void AddColumn(ref Column column)
     {
-        _columns.Add(columnName, column);
+        _columns.Add(column.ColumnName, column);
     }
 }

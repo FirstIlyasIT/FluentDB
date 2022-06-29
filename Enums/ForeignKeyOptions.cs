@@ -1,4 +1,4 @@
-namespace FluentDB.Model;
+namespace FluentDB.Enums;
 
 public enum ForeignKeyOptions
 {

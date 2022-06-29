@@ -1,21 +1,24 @@
 using System;
+using FluentDB.Enums;
 using FluentDB.Model;
 
 namespace FluentDB.Fluent;
 
 public class BaseTableConfig
 {
-    protected BaseTableConfig(TypeDb typeDb, DataBaseSchema dataBaseSchema)
+    protected BaseTableConfig(TypeDb typeDb, Table table)
     {
         _typeDb = typeDb;
-        _dataBaseSchema = dataBaseSchema;
+        _table = table;
     }
     
     private readonly TypeDb _typeDb;
 
-    private readonly DataBaseSchema _dataBaseSchema;
+    private readonly Table _table;
     
-    private string TypeResolve(Type type)
+    protected Table Table => _table;
+
+    protected string TypeResolve(Type type)
     {
         if (type == typeof(int))
             return _typeDb switch
@@ -39,5 +42,12 @@ public class BaseTableConfig
             };
 
         throw new ArgumentOutOfRangeException($"{type} not support");
+    }
+
+    protected string DefaultValueResolve(object defaultValue)
+    {
+        if(defaultValue is null)
+            return "NULL";
+        return defaultValue.ToString();
     }
 }

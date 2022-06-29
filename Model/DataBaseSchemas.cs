@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FluentDB.Model;
 
@@ -16,4 +17,10 @@ public class DataBaseSchemas
     {
         _schemas.Add(version, dataBaseSchema);
     }
+
+    public IEnumerable<string> GetScripts(Version currentVersion, Version targetVersion) 
+        => _schemas
+            .Where(s => s.Key > currentVersion 
+                        && s.Key == targetVersion)
+            .Select(schema => schema.Value.GetScript());
 }

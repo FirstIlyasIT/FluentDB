@@ -1,17 +1,13 @@
 using System;
+using FluentDB.Enums;
 using FluentDB.Model;
 
 namespace FluentDB.Fluent;
 
 public class CreateTableConfig : BaseTableConfig
 {
-    private readonly Table _table;
-    public CreateTableConfig(
-        string tableName, 
-        TypeDb typeDb, 
-        DataBaseSchema dataBaseSchema) : base(typeDb, dataBaseSchema)
+    public CreateTableConfig(TypeDb typeDb, Table table) : base(typeDb, table)
     {
-        _table = new Table(tableName);
     }
 
     public CreateTableConfig AddColumn(
