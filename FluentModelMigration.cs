@@ -43,4 +43,14 @@ public class FluentModelMigration
         _schemas.AddSchema(version, _currentDataBaseSchema);
         _currentDataBaseSchema = new DataBaseSchema();
     }
+
+    protected void Finish()
+    {
+        StartMigration();
+    }
+
+    private void StartMigration()
+    {
+        
+    }
 }
