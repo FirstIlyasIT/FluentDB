@@ -4,8 +4,9 @@ namespace FluentDB.Model;
 
 public class CreateTableConfig : BaseTableConfig
 {
-    public CreateTableConfig(string tableName)
+    public CreateTableConfig(string tableName, TypeDb typeDb) : base(typeDb)
     {
+        
     }
 
     public CreateTableConfig AddColumn(
