@@ -1,4 +1,3 @@
-using System;
 using FluentDB.Enums;
 using FluentDB.Model;
 
@@ -6,28 +5,26 @@ namespace FluentDB.Fluent;
 
 public class CreateTableConfig : BaseTableConfig
 {
-    public CreateTableConfig(TypeDb typeDb, Table table) : base(typeDb, table)
+    public CreateTableConfig(Table table) : base(table)
     {
+        
     }
 
-    public CreateTableConfig AddColumn(
-        string columnName, 
-        Type columnType,
+    public CreateTableConfig AddColumn<TType>(
+        string columnName,
         bool canNull, 
-        object defaultValue = null, 
-        string namePreviousColumn = null)
+        TType defaultValue)
     {
+        var column = new Column();
+        Table.AddColumn(ref column);
         return this;
     }
     
-    public CreateTableConfig AddColumn<TArrayType>(
-        string columnName, 
-        TArrayType[] columnType, 
-        bool canNull, 
-        object defaultValue = null, 
-        string namePreviousColumn = null)
+    public CreateTableConfig AddColumn<TType>(
+        string columnName,
+        bool canNull)
     {
-        return this;
+        return AddColumn<TType>(columnName: columnName, canNull: canNull, defaultValue: default);
     }
 
     public CreateTableConfig PrimaryKey<TType>(
@@ -42,8 +39,8 @@ public class CreateTableConfig : BaseTableConfig
         string columnName, 
         string referenceTable, 
         string referenceColumn, 
-        ForeignKeyOptions onUpdate, 
-        ForeignKeyOptions onDelete)
+        ReferenceOptions onUpdate, 
+        ReferenceOptions onDelete)
     {
         return this;
     }

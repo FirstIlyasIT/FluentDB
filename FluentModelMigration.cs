@@ -12,7 +12,7 @@ public class FluentModelMigration
     private readonly DataBaseSchemas _schemas;
     private readonly Version _currentVersion;
     private readonly Version _targetVersion;
-    
+
     protected FluentModelMigration(
         string connection, 
         TypeDb typeDb, 
@@ -25,23 +25,24 @@ public class FluentModelMigration
         _currentDataBaseSchema = new DataBaseSchema();
         _schemas = new DataBaseSchemas();
     }
+    
+    public CreateTableConfig CreateTable(string tableName)
+    {
+        var table = new Table(tableName);
+        _currentDataBaseSchema.AddTable(table);
+        return new CreateTableConfig(table);
+    }
 
     protected AlterTableConfig AlterTable(string tableName)
     {
-        var table = new Table(tableName);
-        return new AlterTableConfig(_typeDb, table);
-    }
-
-    public CreateTableConfig CreateTable(string tableName)
-    {
         var table = _currentDataBaseSchema[tableName];
-        return new CreateTableConfig(_typeDb, table);
+        return new AlterTableConfig(table);
     }
 
     public DropTableConfig DropTable(string tableName)
     {
         var table = _currentDataBaseSchema[tableName];
-        return new DropTableConfig(_typeDb, table);
+        return new DropTableConfig(table);
     }
 
     protected void EndMigration(Version  version)
@@ -52,11 +53,6 @@ public class FluentModelMigration
 
     protected void Finish()
     {
-        StartMigration();
-    }
-
-    private void StartMigration()
-    {
-        var scripts = _schemas.GetScripts(_currentVersion, _targetVersion);
+        
     }
 }

@@ -16,9 +16,9 @@ public class DataBaseSchema
         _tables = new Dictionary<string, Table>();
     }
 
-    public void AddTable(string tableName, Table table)
+    public void AddTable(Table table)
     {
-        _tables.Add(tableName, table);
+        _tables.Add(table.Name, table);
     }
 
     public Table this[string tableName] => _tables[tableName];

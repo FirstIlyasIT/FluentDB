@@ -1,6 +1,6 @@
 namespace FluentDB.Enums;
 
-public enum ForeignKeyOptions
+public enum ReferenceOptions
 {
     Restrict,
     Cascade,

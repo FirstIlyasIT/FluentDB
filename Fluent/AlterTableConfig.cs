@@ -1,50 +1,29 @@
 using System;
-using FluentDB.Enums;
 using FluentDB.Model;
 
 namespace FluentDB.Fluent;
 
 public class AlterTableConfig: BaseTableConfig
 {
-    public AlterTableConfig(TypeDb typeDb, Table table) : base(typeDb, table)
+    public AlterTableConfig(Table table) : base(table)
     {
         
     }
-        
-    public AlterTableConfig AddColumn<TArrayType>(
-        string columnName, 
-        TArrayType[] columnType, 
+    public AlterTableConfig AddColumn<TType>(
+        string columnName,
         bool canNull, 
-        object defaultValue, 
-        string namePreviousColumn)
+        TType defaultValue)
     {
         return this;
     }
-    public AlterTableConfig AddColumn(
-        string columnName, 
-        Type columnType, 
-        bool canNull, 
-        object defaultValue, 
-        string namePreviousColumn)
-    {
-        var column = new Column(
-            columnName, 
-            TypeResolve(columnType), 
-            canNull, 
-            DefaultValueResolve(defaultValue));
-        Table.AddColumn(ref column);
-        return this;
-    }
-        
-    public AlterTableConfig ChangeColumn<TArrayType>(
-        string oldColumnName, 
-        string newColumnName, 
-        TArrayType[] columnType, 
+    
+    public AlterTableConfig AddColumn<TType>(
+        string columnName,
         bool canNull)
     {
-        return this;
+        return AddColumn<TType>(columnName: columnName, canNull: canNull, defaultValue: default);
     }
-        
+
     public AlterTableConfig ChangeColumn(
         string oldColumnName, 
         string newColumnName, 
@@ -54,7 +33,8 @@ public class AlterTableConfig: BaseTableConfig
         return this;
     }
         
-    public AlterTableConfig DropColumn(string columnName)
+    public AlterTableConfig DropColumn(
+        string columnName)
     {
         return this;
     }

@@ -1,24 +1,26 @@
+using System;
+
 namespace FluentDB.Model;
 
 public struct Column
 {
-    private readonly string _columnType;
-
-    private readonly bool _canNull;
-
-    private readonly string _defaultValue;
-
-    public string ColumnName { get; }
+    public Type ColumnType { get; }
+    
+    public bool CanNull { get; }
+    
+    public string DefaultValue { get; }
+    
+    public string Name { get; }
 
     public Column(
-        string columnName, 
-        string columnType, 
+        string name, 
+        Type columnType, 
         bool canNull, 
         string defaultValue)
     {
-        ColumnName = columnName;
-        _columnType = columnType;
-        _canNull = canNull;
-        _defaultValue = defaultValue;
+        Name = name;
+        ColumnType = columnType;
+        CanNull = canNull;
+        DefaultValue = defaultValue;
     }
 }

@@ -5,7 +5,7 @@ namespace FluentDB.Fluent;
 
 public class DropTableConfig : BaseTableConfig
 {
-    public DropTableConfig(TypeDb typeDb, Table table) : base(typeDb, table)
+    public DropTableConfig(Table table) : base(table)
     {
         
     }

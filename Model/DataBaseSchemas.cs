@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FluentDB.Model;
 
 public class DataBaseSchemas
 {
     private readonly Dictionary<Version, DataBaseSchema> _schemas;
+    private readonly Queue<Version> _versions;
 
     public DataBaseSchemas()
     {
@@ -16,11 +16,6 @@ public class DataBaseSchemas
     public void AddSchema(Version version, DataBaseSchema dataBaseSchema)
     {
         _schemas.Add(version, dataBaseSchema);
+        _versions.Enqueue(version);
     }
-
-    public IEnumerable<string> GetScripts(Version currentVersion, Version targetVersion) 
-        => _schemas
-            .Where(s => s.Key > currentVersion 
-                        && s.Key == targetVersion)
-            .Select(schema => schema.Value.GetScript());
 }
