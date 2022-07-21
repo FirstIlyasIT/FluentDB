@@ -37,6 +37,28 @@ public class CreateTableConfig : BaseTableConfig
             defaultValue: default
             );
     }
+    
+    public CreateTableConfig AddColumn(
+        string columnName,
+        bool canNull)
+    {
+        return AddColumn<string>(
+            columnName: columnName, 
+            canNull: canNull
+            );
+    }
+    
+    public CreateTableConfig AddColumn(
+        string columnName,
+        bool canNull,
+        string defaultValue)
+    {
+        return AddColumn<string>(
+            columnName: columnName, 
+            canNull: canNull,
+            defaultValue: defaultValue
+        );
+    }
 
     public CreateTableConfig PrimaryKey<TType>(
         string columnName = "id", 
@@ -68,6 +90,40 @@ public class CreateTableConfig : BaseTableConfig
                 referenceColumn: _schema[referenceTable][referenceColumn],
                 onUpdate: onUpdate,
                 onDelete: onDelete
+            )
+        );
+        return this;
+    }
+    
+    public CreateTableConfig AddReference(
+        string columnName, 
+        string referenceTable,
+        ReferenceOptions onUpdate, 
+        ReferenceOptions onDelete)
+    {
+        Table.AddReference(
+            new Reference(
+                columnName: columnName,
+                referenceTable: _schema[referenceTable],
+                referenceColumn: _schema[referenceTable]["id"],
+                onUpdate: onUpdate,
+                onDelete: onDelete
+            )
+        );
+        return this;
+    }
+    
+    public CreateTableConfig AddReference(
+        string columnName, 
+        string referenceTable)
+    {
+        Table.AddReference(
+            new Reference(
+                columnName: columnName,
+                referenceTable: _schema[referenceTable],
+                referenceColumn: _schema[referenceTable]["id"],
+                onUpdate: ReferenceOptions.NoAction,
+                onDelete: ReferenceOptions.NoAction
             )
         );
         return this;
