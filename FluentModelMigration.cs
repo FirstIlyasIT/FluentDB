@@ -44,7 +44,7 @@ public class FluentModelMigration
     protected DropTableConfig DropTable(string tableName)
     {
         var table = _currentDataBaseSchema[tableName];
-        return new DropTableConfig(table);
+        return new DropTableConfig(table, _currentDataBaseSchema);
     }
 
     protected void EndMigration(Version  version)

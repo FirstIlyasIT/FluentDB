@@ -4,13 +4,18 @@ namespace FluentDB.FluentMigration;
 
 public class DropTableConfig : BaseTableConfig
 {
-    public DropTableConfig(Table table) : base(table)
+    private readonly DataBaseSchema _schema;
+    public DropTableConfig(
+        Table table, 
+        DataBaseSchema currentDataBaseSchema
+        ) : base(table)
     {
-        
+        _schema = currentDataBaseSchema;
     }
 
-    public DropTableConfig IfExist()
+    public DropTableConfig Drop()
     {
+        _schema.DropTable(Table);
         return this;
     }
 }

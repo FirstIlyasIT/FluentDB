@@ -22,4 +22,9 @@ public class DataBaseSchema
     }
 
     internal Table this[string tableName] => _tables[tableName];
+
+    public void DropTable(Table table)
+    {
+        _tables.Remove(table.Name);
+    }
 }
