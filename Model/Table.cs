@@ -8,6 +8,8 @@ public class Table
     
     private readonly Dictionary<string, Column> _columns;
     
+    private readonly Dictionary<string, Reference> _references;
+    
     internal PrimaryKey PrimaryKey { get; private set; }
 
     internal bool Erased { get; set; }
@@ -18,6 +20,7 @@ public class Table
     {
         Name = name;
         _columns = new Dictionary<string, Column>();
+        _references = new Dictionary<string, Reference>();
     }
 
     internal void AddColumn(Column column)
@@ -28,5 +31,17 @@ public class Table
     public void SetPrimaryKey(PrimaryKey primaryKey)
     {
         PrimaryKey = primaryKey;
+    }
+
+    public void AddReference(Reference reference)
+    {
+        _references.Add(reference.ColumnName, reference);
+    }
+
+    public Column this[string column] => _columns[column];
+
+    public void DropColumn(Column column)
+    {
+        _columns.Remove(column.Name);
     }
 }

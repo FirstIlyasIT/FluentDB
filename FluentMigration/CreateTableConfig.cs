@@ -5,9 +5,10 @@ namespace FluentDB.FluentMigration;
 
 public class CreateTableConfig : BaseTableConfig
 {
-    public CreateTableConfig(Table table) : base(table)
+    private readonly DataBaseSchema _schema;
+    public CreateTableConfig(Table table, DataBaseSchema currentDataBaseSchema) : base(table)
     {
-        
+        _schema = currentDataBaseSchema;
     }
 
     public CreateTableConfig AddColumn<TType>(
@@ -44,10 +45,10 @@ public class CreateTableConfig : BaseTableConfig
     {
         Table.SetPrimaryKey(
             new PrimaryKey(
-                columnName,
-                typeof(TType),
-                autoIncrement,
-                startAutoIncrement
+                columnName: columnName,
+                type: typeof(TType),
+                autoIncrement: autoIncrement,
+                startAutoIncrement: startAutoIncrement.ToString()
                 )
             );
         return this;
@@ -60,6 +61,15 @@ public class CreateTableConfig : BaseTableConfig
         ReferenceOptions onUpdate, 
         ReferenceOptions onDelete)
     {
+        Table.AddReference(
+            new Reference(
+                columnName: columnName,
+                referenceTable: _schema[referenceTable],
+                referenceColumn: _schema[referenceTable][referenceColumn],
+                onUpdate: onUpdate,
+                onDelete: onDelete
+            )
+        );
         return this;
     }
 }

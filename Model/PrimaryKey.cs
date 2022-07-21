@@ -5,15 +5,18 @@ namespace FluentDB.Model;
 public class PrimaryKey
 {
     private string _columnName;
+    private Type _type;
     private bool _autoIncrement;
-    private object _startAutoIncrement;
+    private string _startAutoIncrement;
     public PrimaryKey(
         string columnName,
-        Type increment,
+        Type type,
         bool autoIncrement,
-        object startAutoIncrement)
+        string startAutoIncrement)
     {
         _columnName = columnName;
-        throw new System.NotImplementedException();
+        _type = type;
+        _autoIncrement = autoIncrement;
+        _startAutoIncrement = startAutoIncrement;
     }
 }

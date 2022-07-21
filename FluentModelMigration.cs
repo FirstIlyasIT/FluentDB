@@ -32,7 +32,7 @@ public class FluentModelMigration
     {
         var table = new Table(tableName);
         _currentDataBaseSchema.AddTable(table);
-        return new CreateTableConfig(table);
+        return new CreateTableConfig(table, _currentDataBaseSchema);
     }
 
     protected AlterTableConfig AlterTable(string tableName)

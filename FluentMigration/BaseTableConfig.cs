@@ -2,7 +2,7 @@ using FluentDB.Model;
 
 namespace FluentDB.FluentMigration;
 
-public class BaseTableConfig
+public abstract class BaseTableConfig
 {
     protected BaseTableConfig(Table table)
     {
