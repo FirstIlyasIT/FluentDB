@@ -54,16 +54,64 @@ public class AlterTableConfig: BaseTableConfig
     
     public AlterTableConfig ChangeColumn(
         string oldColumnName,
-        Type columnType, 
-        bool canNull,
-        object defaultValue)
+        string newColumnName)
     {
+        var column = Table[oldColumnName];
+        ChangeColumn(
+            oldColumnName: oldColumnName,
+            newColumnName: newColumnName,
+            columnType: column.ColumnType,
+            canNull: column.CanNull,
+            defaultValue: column.DefaultValue
+            
+        );
+        return this;
+    }
+    
+    public AlterTableConfig ChangeColumn(
+        string oldColumnName,
+        Type newColumnType)
+    {
+        var column = Table[oldColumnName];
         ChangeColumn(
             oldColumnName: oldColumnName,
             newColumnName: oldColumnName,
-            columnType: columnType,
+            columnType: newColumnType,
+            canNull: column.CanNull,
+            defaultValue: column.DefaultValue
+            
+        );
+        return this;
+    }
+    
+    public AlterTableConfig ChangeColumn(
+        string oldColumnName,
+        bool canNull)
+    {
+        var column = Table[oldColumnName];
+        ChangeColumn(
+            oldColumnName: oldColumnName,
+            newColumnName: oldColumnName,
+            columnType: column.ColumnType,
             canNull: canNull,
+            defaultValue: column.DefaultValue
+            
+        );
+        return this;
+    }
+    
+    public AlterTableConfig ChangeColumn(
+        string oldColumnName,
+        object defaultValue)
+    {
+        var column = Table[oldColumnName];
+        ChangeColumn(
+            oldColumnName: oldColumnName,
+            newColumnName: oldColumnName,
+            columnType: column.ColumnType,
+            canNull: column.CanNull,
             defaultValue: defaultValue
+            
         );
         return this;
     }
