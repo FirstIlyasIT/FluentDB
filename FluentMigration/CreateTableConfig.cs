@@ -78,52 +78,17 @@ public class CreateTableConfig : BaseTableConfig
 
     public CreateTableConfig AddReference(
         string columnName, 
-        string referenceTable, 
-        string referenceColumn, 
-        ReferenceOptions onUpdate, 
-        ReferenceOptions onDelete)
-    {
-        Table.AddReference(
-            new Reference(
-                columnName: columnName,
-                referenceTable: _schema[referenceTable],
-                referenceColumn: _schema[referenceTable][referenceColumn],
-                onUpdate: onUpdate,
-                onDelete: onDelete
-            )
-        );
-        return this;
-    }
-    
-    public CreateTableConfig AddReference(
-        string columnName, 
         string referenceTable,
-        ReferenceOptions onUpdate, 
-        ReferenceOptions onDelete)
+        ReferenceOptions onUpdate = ReferenceOptions.NoAction, 
+        ReferenceOptions onDelete = ReferenceOptions.NoAction)
     {
         Table.AddReference(
             new Reference(
                 columnName: columnName,
                 referenceTable: _schema[referenceTable],
-                referenceColumn: _schema[referenceTable]["id"],
+                referenceKey: _schema[referenceTable].PrimaryKey,
                 onUpdate: onUpdate,
                 onDelete: onDelete
-            )
-        );
-        return this;
-    }
-    
-    public CreateTableConfig AddReference(
-        string columnName, 
-        string referenceTable)
-    {
-        Table.AddReference(
-            new Reference(
-                columnName: columnName,
-                referenceTable: _schema[referenceTable],
-                referenceColumn: _schema[referenceTable]["id"],
-                onUpdate: ReferenceOptions.NoAction,
-                onDelete: ReferenceOptions.NoAction
             )
         );
         return this;

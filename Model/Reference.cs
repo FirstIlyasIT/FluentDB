@@ -8,7 +8,7 @@ public class Reference
 
     private Table referenceTable { get; }
     
-    private Column referenceColumn { get; }
+    private PrimaryKey ReferenceKey { get; }
     
     private ReferenceOptions onUpdate { get; }
     
@@ -16,7 +16,7 @@ public class Reference
 
     public Reference(string columnName,
         Table referenceTable,
-        Column referenceColumn,
+        PrimaryKey referenceKey,
         ReferenceOptions onUpdate,
         ReferenceOptions onDelete)
     {
