@@ -1,12 +1,13 @@
 using System;
 using FluentDB.Enums;
-using FluentDB.Fluent;
+using FluentDB.FluentMigration;
 using FluentDB.Model;
 
 namespace FluentDB;
 
 public class FluentModelMigration
 {
+    private readonly string _connection;
     private readonly TypeDb _typeDb;
     private DataBaseSchema _currentDataBaseSchema;
     private readonly DataBaseSchemas _schemas;
@@ -19,6 +20,7 @@ public class FluentModelMigration
         Version currentVersion,
         Version targetVersion)
     {
+        _connection = connection;
         _typeDb = typeDb;
         _currentVersion = currentVersion;
         _targetVersion = targetVersion;
@@ -26,7 +28,7 @@ public class FluentModelMigration
         _schemas = new DataBaseSchemas();
     }
     
-    public CreateTableConfig CreateTable(string tableName)
+    protected CreateTableConfig CreateTable(string tableName)
     {
         var table = new Table(tableName);
         _currentDataBaseSchema.AddTable(table);
@@ -39,7 +41,7 @@ public class FluentModelMigration
         return new AlterTableConfig(table);
     }
 
-    public DropTableConfig DropTable(string tableName)
+    protected DropTableConfig DropTable(string tableName)
     {
         var table = _currentDataBaseSchema[tableName];
         return new DropTableConfig(table);

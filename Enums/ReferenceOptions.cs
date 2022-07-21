@@ -5,5 +5,6 @@ public enum ReferenceOptions
     Restrict,
     Cascade,
     SetNull,
+    SetDefault,
     NoAction
 }

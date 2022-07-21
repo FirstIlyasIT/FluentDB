@@ -2,15 +2,15 @@ using System;
 
 namespace FluentDB.Model;
 
-public struct Column
+public class Column
 {
-    public Type ColumnType { get; }
+    internal Type ColumnType { get; }
     
-    public bool CanNull { get; }
+    internal bool CanNull { get; }
     
-    public string DefaultValue { get; }
+    internal string DefaultValue { get; }
     
-    public string Name { get; }
+    internal string Name { get; }
 
     public Column(
         string name, 

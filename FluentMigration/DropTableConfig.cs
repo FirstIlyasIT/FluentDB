@@ -1,7 +1,6 @@
-using FluentDB.Enums;
 using FluentDB.Model;
 
-namespace FluentDB.Fluent;
+namespace FluentDB.FluentMigration;
 
 public class DropTableConfig : BaseTableConfig
 {

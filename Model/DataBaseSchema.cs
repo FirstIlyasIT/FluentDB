@@ -6,25 +6,20 @@ public class DataBaseSchema
 {
     private readonly Dictionary<string, Table> _tables;
 
-    public DataBaseSchema(DataBaseSchema previousDataBaseSchema) : base()
+    internal DataBaseSchema(DataBaseSchema previousDataBaseSchema) : base()
     {
         
     }
 
-    public DataBaseSchema()
+    internal DataBaseSchema()
     {
         _tables = new Dictionary<string, Table>();
     }
 
-    public void AddTable(Table table)
+    internal void AddTable(Table table)
     {
         _tables.Add(table.Name, table);
     }
 
-    public Table this[string tableName] => _tables[tableName];
-
-    public string GetScript()
-    {
-        throw new System.NotImplementedException();
-    }
+    internal Table this[string tableName] => _tables[tableName];
 }

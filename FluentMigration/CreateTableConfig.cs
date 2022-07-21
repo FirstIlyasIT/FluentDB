@@ -1,7 +1,7 @@
 using FluentDB.Enums;
 using FluentDB.Model;
 
-namespace FluentDB.Fluent;
+namespace FluentDB.FluentMigration;
 
 public class CreateTableConfig : BaseTableConfig
 {
@@ -15,8 +15,14 @@ public class CreateTableConfig : BaseTableConfig
         bool canNull, 
         TType defaultValue)
     {
-        var column = new Column();
-        Table.AddColumn(ref column);
+        Table.AddColumn(
+            new Column(
+                name: columnName, 
+                columnType:typeof(TType), 
+                canNull: canNull, 
+                defaultValue: defaultValue.ToString()
+                )
+            );
         return this;
     }
     
@@ -24,14 +30,26 @@ public class CreateTableConfig : BaseTableConfig
         string columnName,
         bool canNull)
     {
-        return AddColumn<TType>(columnName: columnName, canNull: canNull, defaultValue: default);
+        return AddColumn<TType>(
+            columnName: columnName, 
+            canNull: canNull, 
+            defaultValue: default
+            );
     }
 
     public CreateTableConfig PrimaryKey<TType>(
-        string columnName, 
-        bool autoIncrement, 
-        TType startAutoIncrement)
+        string columnName = "id", 
+        bool autoIncrement = true, 
+        TType startAutoIncrement = default)
     {
+        Table.SetPrimaryKey(
+            new PrimaryKey(
+                columnName,
+                typeof(TType),
+                autoIncrement,
+                startAutoIncrement
+                )
+            );
         return this;
     }
 
