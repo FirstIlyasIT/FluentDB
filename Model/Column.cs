@@ -4,13 +4,19 @@ namespace FluentDB.Model;
 
 public class Column
 {
+    #region internalFields
+
+    internal string Name { get; private set; }
+    
     internal Type ColumnType { get; private set; }
     
     internal bool CanNull { get; private set; }
     
     internal string DefaultValue { get; private set; }
-    
-    internal string Name { get; private set; }
+
+    #endregion
+
+    #region ctor
 
     public Column(
         string name, 
@@ -24,6 +30,10 @@ public class Column
         DefaultValue = defaultValue;
     }
 
+    #endregion
+
+    #region publicMethods
+
     public void SetNewData(
         string newColumnName, 
         Type newColumnType, 
@@ -35,4 +45,6 @@ public class Column
         CanNull = canNull;
         DefaultValue = defaultValue;
     }
+
+    #endregion
 }

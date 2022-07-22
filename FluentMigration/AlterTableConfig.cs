@@ -5,10 +5,18 @@ namespace FluentDB.FluentMigration;
 
 public class AlterTableConfig: BaseTableConfig
 {
+    #region ctor
+    
     public AlterTableConfig(Table table) : base(table)
     {
         
     }
+    #endregion
+
+    #region TableConfig
+
+    #region AddColumn
+
     public AlterTableConfig AddColumn<TType>(
         string columnName,
         bool canNull, 
@@ -20,8 +28,8 @@ public class AlterTableConfig: BaseTableConfig
                 columnType:typeof(TType), 
                 canNull: canNull, 
                 defaultValue: defaultValue.ToString()
-                )
-            );
+            )
+        );
         return this;
     }
     
@@ -33,8 +41,12 @@ public class AlterTableConfig: BaseTableConfig
             columnName: columnName, 
             canNull: canNull, 
             defaultValue: default
-            );
+        );
     }
+
+    #endregion
+
+    #region ChangeColumn
 
     public AlterTableConfig ChangeColumn(
         string oldColumnName, 
@@ -115,11 +127,19 @@ public class AlterTableConfig: BaseTableConfig
         );
         return this;
     }
-        
+
+    #endregion
+
+    #region DropColumn
+
     public AlterTableConfig DropColumn(
         string columnName)
     {
         Table.DropColumn(Table[columnName]);
         return this;
     }
+
+    #endregion
+    
+    #endregion
 }

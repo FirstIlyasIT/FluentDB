@@ -7,12 +7,18 @@ namespace FluentDB;
 
 public class FluentModelMigration
 {
+    #region privateFields
+
     private readonly string _connection;
     private readonly TypeDb _typeDb;
     private DataBaseSchema _currentDataBaseSchema;
     private readonly DataBaseSchemas _schemas;
     private readonly Version _currentVersion;
     private readonly Version _targetVersion;
+
+    #endregion
+
+    #region ctor
 
     protected FluentModelMigration(
         string connection, 
@@ -27,7 +33,11 @@ public class FluentModelMigration
         _currentDataBaseSchema = new DataBaseSchema();
         _schemas = new DataBaseSchemas();
     }
-    
+
+    #endregion
+
+    #region TablesConfig
+
     protected CreateTableConfig CreateTable(string tableName)
     {
         var table = new Table(tableName);
@@ -47,14 +57,24 @@ public class FluentModelMigration
         return new DropTableConfig(table, _currentDataBaseSchema);
     }
 
+    #endregion
+
+    #region Migrations
+
     protected void EndMigration(Version  version)
     {
         _schemas.AddSchema(version, _currentDataBaseSchema);
         _currentDataBaseSchema = new DataBaseSchema(_currentDataBaseSchema);
     }
 
+    #endregion
+
+    #region protectedMethods
+
     protected void Finish()
     {
         
     }
+
+    #endregion
 }

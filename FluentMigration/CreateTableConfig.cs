@@ -5,11 +5,24 @@ namespace FluentDB.FluentMigration;
 
 public class CreateTableConfig : BaseTableConfig
 {
+    #region privateFields
+
     private readonly DataBaseSchema _schema;
+
+    #endregion
+
+    #region ctor
+
     public CreateTableConfig(Table table, DataBaseSchema currentDataBaseSchema) : base(table)
     {
         _schema = currentDataBaseSchema;
     }
+
+    #endregion
+
+    #region ColumnConfig
+
+    #region AddColumn
 
     public CreateTableConfig AddColumn<TType>(
         string columnName,
@@ -22,8 +35,8 @@ public class CreateTableConfig : BaseTableConfig
                 columnType:typeof(TType), 
                 canNull: canNull, 
                 defaultValue: defaultValue.ToString()
-                )
-            );
+            )
+        );
         return this;
     }
     
@@ -35,7 +48,7 @@ public class CreateTableConfig : BaseTableConfig
             columnName: columnName, 
             canNull: canNull, 
             defaultValue: default
-            );
+        );
     }
     
     public CreateTableConfig AddColumn(
@@ -45,7 +58,7 @@ public class CreateTableConfig : BaseTableConfig
         return AddColumn<string>(
             columnName: columnName, 
             canNull: canNull
-            );
+        );
     }
     
     public CreateTableConfig AddColumn(
@@ -60,6 +73,10 @@ public class CreateTableConfig : BaseTableConfig
         );
     }
 
+    #endregion
+
+    #region primaryKey
+
     public CreateTableConfig PrimaryKey<TType>(
         string columnName = "id", 
         bool autoIncrement = true, 
@@ -71,10 +88,14 @@ public class CreateTableConfig : BaseTableConfig
                 type: typeof(TType),
                 autoIncrement: autoIncrement,
                 startAutoIncrement: startAutoIncrement.ToString()
-                )
-            );
+            )
+        );
         return this;
     }
+
+    #endregion
+
+    #region refences
 
     public CreateTableConfig AddReference(
         string columnName, 
@@ -93,4 +114,8 @@ public class CreateTableConfig : BaseTableConfig
         );
         return this;
     }
+
+    #endregion
+
+    #endregion
 }

@@ -4,10 +4,17 @@ namespace FluentDB.Model;
 
 public class PrimaryKey
 {
-    private string _columnName;
-    private Type _type;
-    private bool _autoIncrement;
-    private string _startAutoIncrement;
+    #region privateFields
+
+    private readonly string _columnName;
+    private readonly Type _type;
+    private readonly bool _autoIncrement;
+    private readonly string _startAutoIncrement;
+
+    #endregion
+
+    #region ctor
+
     public PrimaryKey(
         string columnName,
         Type type,
@@ -19,4 +26,6 @@ public class PrimaryKey
         _autoIncrement = autoIncrement;
         _startAutoIncrement = startAutoIncrement;
     }
+
+    #endregion
 }

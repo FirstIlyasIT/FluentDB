@@ -4,15 +4,22 @@ namespace FluentDB.Model;
 
 public class Reference
 {
+
+    #region internalFields
+
     internal string ColumnName { get; }
 
-    private Table referenceTable { get; }
+    internal Table referenceTable { get; }
     
-    private PrimaryKey ReferenceKey { get; }
+    internal PrimaryKey ReferenceKey { get; }
     
-    private ReferenceOptions onUpdate { get; }
+    internal ReferenceOptions OnUpdate { get; }
     
-    private ReferenceOptions onDelete { get; }
+    internal ReferenceOptions OnDelete { get; }
+
+    #endregion
+
+    #region ctor
 
     public Reference(string columnName,
         Table referenceTable,
@@ -20,6 +27,11 @@ public class Reference
         ReferenceOptions onUpdate,
         ReferenceOptions onDelete)
     {
-        
+        ColumnName = columnName;
+        ReferenceKey = referenceKey;
+        OnUpdate = onUpdate;
+        OnDelete = onDelete;
     }
+
+    #endregion
 }
