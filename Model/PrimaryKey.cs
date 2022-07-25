@@ -28,4 +28,18 @@ public class PrimaryKey
     }
 
     #endregion
+
+    #region publicMethods
+
+    internal PrimaryKey GetClone()
+    {
+        return new PrimaryKey(
+            columnName: _columnName, 
+            type: _type, 
+            autoIncrement: _autoIncrement,
+            startAutoIncrement: _startAutoIncrement
+        );
+    }
+
+    #endregion
 }

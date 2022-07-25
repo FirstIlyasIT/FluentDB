@@ -11,8 +11,6 @@ public class Table
     internal PrimaryKey PrimaryKey { get; private set; }
     
     internal bool Erased { get; }
-    
-    internal bool ErasedIfExist { get; }
 
     #endregion
 
@@ -70,6 +68,26 @@ public class Table
     #region indexers
 
     public Column this[string column] => _columns[column];
+
+    #endregion
+
+    #region Methods
+
+    internal Table GetClone()
+    {
+        var clone = new Table(Name);
+        clone.SetPrimaryKey(PrimaryKey.GetClone());
+        foreach (var column in _columns)
+        {
+            clone.AddColumn(column.Value.GetClone());
+        }
+
+        foreach (var reference in _references)
+        {
+            clone.AddReference(reference.Value.GetClone());
+        }
+        return clone;
+    }
 
     #endregion
 }

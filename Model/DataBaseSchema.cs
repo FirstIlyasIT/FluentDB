@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FluentDB.Model;
 
@@ -13,9 +14,9 @@ public class DataBaseSchema
 
     #region ctor
 
-    internal DataBaseSchema(DataBaseSchema previousDataBaseSchema) : base()
+    internal DataBaseSchema(DataBaseSchema previousDataBaseSchema)
     {
-        
+        _tables = previousDataBaseSchema.GetCopyTables();
     }
 
     internal DataBaseSchema()
@@ -41,6 +42,13 @@ public class DataBaseSchema
     public void DropTable(Table table)
     {
         _tables.Remove(table.Name);
+    }
+    
+    private Dictionary<string, Table> GetCopyTables()
+    {
+        return _tables
+            .Where(table => !table.Value.Erased)
+            .ToDictionary(table => table.Key, table => table.Value.GetClone());
     }
 
     #endregion

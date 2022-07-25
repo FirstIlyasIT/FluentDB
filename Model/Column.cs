@@ -45,6 +45,15 @@ public class Column
         CanNull = canNull;
         DefaultValue = defaultValue;
     }
+    
+    public Column GetClone()
+    {
+        return new Column(
+            name: Name, 
+            columnType: ColumnType, 
+            canNull: CanNull, 
+            defaultValue: DefaultValue);
+    }
 
     #endregion
 }

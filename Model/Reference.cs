@@ -34,4 +34,19 @@ public class Reference
     }
 
     #endregion
+
+    #region publicMethods
+
+    public Reference GetClone()
+    {
+        return new Reference(
+            columnName: ColumnName, 
+            referenceTable: referenceTable, 
+            referenceKey: ReferenceKey,
+            onUpdate: OnUpdate, 
+            onDelete: OnDelete
+            );
+    }
+
+    #endregion
 }

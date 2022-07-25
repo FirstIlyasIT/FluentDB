@@ -27,7 +27,7 @@ public class AlterTableConfig: BaseTableConfig
                 name: columnName, 
                 columnType:typeof(TType), 
                 canNull: canNull, 
-                defaultValue: defaultValue.ToString()
+                defaultValue: defaultValue?.ToString()
             )
         );
         return this;
